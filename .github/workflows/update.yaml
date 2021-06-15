@@ -1,0 +1,17 @@
+name: Check for updated version
+on:
+  schedule:
+    - cron: "13 2 * * 2"
+jobs:
+  run:
+    name: Update version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Update
+        id: update
+        run: |
+          ./bedrockUpdate.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
